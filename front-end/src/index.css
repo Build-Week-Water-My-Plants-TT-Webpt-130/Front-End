@@ -13,4 +13,7 @@
 
 body{
     background-color: lightgreen;
+    background-image: url("https://www.freeiconspng.com/uploads/transparent-vines-png-8.png");
+    background-position: center;
+    background-repeat:repeat;
 }

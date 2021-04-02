@@ -66,11 +66,16 @@ const Login = () => {
     return(
       <Styled>
         <div className='main'>
+
           <h1>Water my Plants</h1>
+
             <form onSubmit={onSubmit} className='form'>
+
             <h3>Log into your Account</h3>
+
               <div>{formErrors.username}</div>
               <div>{formErrors.password}</div>
+
                 <label>Username:
                     <input 
                     onChange={onChange}
@@ -80,6 +85,7 @@ const Login = () => {
                     placeholder='Username'
                     />
                 </label>
+
                 <label className='last'>Password:
                     <input 
                         onChange={onChange}
@@ -89,11 +95,15 @@ const Login = () => {
                         placeholder='Password'
                     />
                 </label>
+
                 <Link to='/plants' className='btn-link'>
                   <button className='btn' disabled={disabled}>Login</button>
                 </Link>
+
               <Link to='/register' className='link'>Don't Have An Account?</Link>
+
             </form>
+            
         </div>
       </Styled>
     )
