@@ -42,7 +42,7 @@ const Register = () => {
               ...errors, 
               [e.target.name]: formErrors[0]
           }));
-      
+
         setFormValues({
           ...formValues,
           [e.target.name]: e.target.value,

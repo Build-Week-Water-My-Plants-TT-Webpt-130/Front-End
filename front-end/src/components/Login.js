@@ -9,7 +9,7 @@ import { UserContext } from '../contexts/UserContext';
 const initialFormErrors = {
     username: '',
     password: '',
-};
+}
 
 const initialDisabled = true;
 
