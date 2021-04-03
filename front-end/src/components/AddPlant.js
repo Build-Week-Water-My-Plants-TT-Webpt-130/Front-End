@@ -73,7 +73,7 @@ const AddPlant = ({plantList, setPlantList}) => {
     return(
         <Styled>
   
-        <form onSubmit={submit}>
+        <form onSubmit={submit} className='form'>
         
             <div className='heading'>
 
@@ -157,6 +157,10 @@ button{
   font-family: Comfortaa;
 }
 
+& .form {
+
+}
+
 & .heading{
     display: flex;
     justify-content: center;
@@ -169,6 +173,8 @@ button{
     width: 80%;
     align-items: center;
     margin: 0 auto;
+    border: solid 4px forestgreen;
+    background-color: #E9967A;
 }
 
 button:hover{
