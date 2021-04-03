@@ -65,9 +65,9 @@ const EditUser = () => {
 
     useEffect(() => {
         editUserSchema
-          .isValid(user)
+          .isValid(formValues)
           .then(valid => setDisabled(!valid))
-        }, [user])
+        }, [formValues])
 
     return(
         <>
