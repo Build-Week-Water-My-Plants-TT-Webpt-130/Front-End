@@ -1,15 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import * as yup from 'yup';
-import axios from "axios";
 import { loginSchema } from '../validation/loginSchema';
 import styled from 'styled-components';
 import { useHistory, Link } from "react-router-dom";
 import '../index.css';
-
-const initialFormValues = {
-    username: '',
-    password: '',
-};
+import axios from 'axios';
+import { UserContext } from '../contexts/UserContext';
 
 const initialFormErrors = {
     username: '',
@@ -19,8 +15,9 @@ const initialFormErrors = {
 const initialDisabled = true;
 
 const Login = () => {
+
+    const { formValues, setFormValues } = useContext(UserContext);
   
-    const [ formValues, setFormValues ] = useState(initialFormValues);
     const [ formErrors, setFormErrors ] = useState(initialFormErrors);
     const [ disabled, setDisabled ] = useState(initialDisabled);
 
@@ -32,7 +29,6 @@ const Login = () => {
             .then(res => {
                 console.log(res);
                 localStorage.setItem('authToken', res.data.payload);
-                setFormValues(initialFormValues);
             })
             .catch(err => console.log(err));
         push('/plants');
@@ -101,12 +97,10 @@ const Login = () => {
                 </Link>
 
               <Link to='/register' className='link'>Don't Have An Account?</Link>
-
             </form>
-            
         </div>
-      </Styled>
-    )
+    </Styled>
+  )
 };
 
 export default Login;

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axiosWithAuth from '../helpers/axiosWithAuth';
 import * as yup from 'yup';
 import editUserSchema from '../validation/editUserSchema';
+import { UserContext } from '../contexts/UserContext';
 
-const EditUser = ({user, setUser}) => {
+const EditUser = () => {
+
+    const { formValues, setFormValues } = useContext(UserContext);
 
     const initialFormErrors = {
         nickname: '',
@@ -22,27 +25,26 @@ const EditUser = ({user, setUser}) => {
 
     const saveEdit = e => {
         e.preventDefault();
-        axiosWithAuth().put(`https://tt130bwplants.herokuapp.com/api/user/${user.id}`, user)
+        axiosWithAuth().put(`https://tt130bwplants.herokuapp.com/api/user/${formValues.id}`, formValues)
             .then(res => {
                 console.log(res)
-                setUser(res.data)
+                setFormValues(res.data)
             })
             .catch(err => console.log(err));
         push('/plants')
     };
 
-    const deleteUser = username => {
-        axiosWithAuth().delete(`https://tt130bwplants.herokuapp.com/api/user/${username.id}`)
+    const deleteUser = e => {
+        axiosWithAuth().delete(`https://tt130bwplants.herokuapp.com/api/user/${formValues.id}`)
             .then(res => {
-                setUser(user);
-                console.log(user)
+                console.log(res);
+                setFormValues(formValues);
             })
             .catch(err => console.log(err));
         push('/')
     };
 
     const handleChange = (e) => {
-
         yup
         .reach(editUserSchema, e.target.name)
         .validate(e.target.value)
@@ -55,8 +57,8 @@ const EditUser = ({user, setUser}) => {
             [e.target.name]: formErrors[0]
           }));
 
-        setUser({ 
-            ...user, 
+        setFormValues({ 
+            ...formValues, 
             [e.target.name]: e.target.value 
         })
     };
@@ -77,18 +79,19 @@ const EditUser = ({user, setUser}) => {
             <input
                 name="password"
                 onChange={handleChange}
-                value={user.password}
+                value={formValues.password}
             />
     
             <label htmlFor="phone">Phone Number:</label>
             <input
                 name="phone"
                 onChange={handleChange}
-                value={user.phonenumber}
+                value={formValues.phonenumber}
             />
     
             <button disabled={disabled}>Save</button>
-            <button onClick={deleteUser}>Delete Account</button>
+
+            <button onClick={() => deleteUser}>Delete Account</button>
         </form>
         </>
     )
